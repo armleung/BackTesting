@@ -9,6 +9,6 @@ public:
     void run();
 
 private:
-    std::queue<Event> eventQueue;
+    std::queue<std::shared_ptr<Event>> eventQueue;
     std::shared_ptr<DataHandler> dataHandler;
 };

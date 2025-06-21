@@ -13,7 +13,7 @@ public:
 
 class CSVDataHandler : public DataHandler {
 public:
-    CSVDataHandler(std::queue<Event>& eventQueue, const std::string& filePath);
+    CSVDataHandler(std::queue<std::shared_ptr<Event>>& eventQueue, const std::string& filePath);
     void tick() override;
 private:
     std::string filePath;
@@ -23,5 +23,5 @@ private:
 
     void readNextLine();
 
-    std::queue<Event>& eventQueue;
+    std::queue<std::shared_ptr<Event>>& eventQueue;
 };
