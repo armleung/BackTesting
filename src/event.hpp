@@ -1,5 +1,6 @@
 #pragma once
 #include "types.hpp"
+#include <string>
 
 enum class EventType {
     TICK, 
@@ -27,6 +28,8 @@ public:
 
     TickEvent(OHLC&& ohlcData) 
         : Event(EventType::TICK), ohlcData(std::move(ohlcData)) {}
+
+    const OHLC& getOHLCData() const { return ohlcData; }
 
 private:
     OHLC ohlcData; // Timestamp, Open, High, Low, Close, Volume
