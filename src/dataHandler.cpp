@@ -10,6 +10,11 @@ CSVDataHandler::CSVDataHandler(std::queue<std::shared_ptr<Event>>& eventQueue, c
         endOfFile = true;
     }
     std::getline(fileStream, currentLine); // Read the header line
+
+    while (std::getline(fileStream, currentLine)) {
+        lines.push_back(currentLine);
+    }
+    std::reverse(lines.begin(), lines.end()); // Reverse the lines to process from oldest to newest
 }
 
 void CSVDataHandler::tick()
@@ -19,7 +24,8 @@ void CSVDataHandler::tick()
 }
 
 void CSVDataHandler::readNextLine() {
-    if (std::getline(fileStream, currentLine)) {
+    if (currentLineIndex < lines.size()) {
+        currentLine = lines[currentLineIndex++];
         
         std::stringstream ss(currentLine);
         std::string lineItem;
@@ -31,7 +37,7 @@ void CSVDataHandler::readNextLine() {
         // Directly construct the TickEvent with parsed OHLC data using lvalue references
         eventQueue.push(std::make_shared<TickEvent>(
             std::make_tuple(
-                std::stoll(lineVector[0]), // Timestamp
+                lineVector[0],             // Timestamp
                 std::stod(lineVector[1]),  // Open
                 std::stod(lineVector[2]),  // High
                 std::stod(lineVector[3]),  // Low

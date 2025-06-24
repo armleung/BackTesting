@@ -3,14 +3,14 @@
 
 void MovingAverageStrategy::calculateSignal(const OHLC &data)
 {
-    double closePrice = std::get<CLOSE_IDX>(data);
-    long long timestamp = std::get<TIMESTAMP_IDX>(data);
+    auto closePrice = std::get<CLOSE_IDX>(data);
+    auto timestamp = std::get<TIMESTAMP_IDX>(data);
     shortBuffer.add(closePrice);
     longBuffer.add(closePrice);
 
     // Calculate the moving average
-    double shortMovingAverage = shortBuffer.moving_average();
-    double longMovingAverage = longBuffer.moving_average();
+    auto shortMovingAverage = shortBuffer.moving_average();
+    auto longMovingAverage = longBuffer.moving_average();
 
     // Generate a signal based on the moving average
     if (closePrice > shortMovingAverage) {

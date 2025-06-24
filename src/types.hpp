@@ -9,4 +9,4 @@ constexpr std::size_t CLOSE_IDX     = 4;
 constexpr std::size_t VOLUME_IDX    = 5;
 
 // Timestamp, Open, High, Low, Close, Volume
-using OHLC = std::tuple<long, double, double, double, double, int>; 
+using OHLC = std::tuple<std::string, double, double, double, double, int>; 

@@ -19,7 +19,9 @@ private:
     std::string filePath;
     std::ifstream fileStream;
     std::string currentLine;
-    bool endOfFile = false;
+    bool endOfFile{false};
+    std::vector<std::string> lines;
+    int currentLineIndex{0};
 
     void readNextLine();
 
